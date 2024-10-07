@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&ik1v#j30kor11%!cc1z7#+-b)j^o$^t39c@fdq%u3gc$iwt7+
 DEBUG = True
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['localhost', '192.168.43.135', 'example.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'example.com']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'api'
 ]
 
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -68,6 +71,31 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  # or any other origin you want to allow
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
