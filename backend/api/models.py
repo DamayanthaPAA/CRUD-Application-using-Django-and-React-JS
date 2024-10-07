@@ -9,3 +9,8 @@ class Students(models.Model):
     address = models.TextField()
     contact_number = models.CharField(max_length=15)
     gread = models.CharField(max_length=1,default="A")
+
+
+    def __str__(self) -> str:
+        # return super().__str__()
+        return self.first_name
