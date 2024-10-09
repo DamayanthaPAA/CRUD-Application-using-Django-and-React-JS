@@ -43,6 +43,22 @@ const App = () => {
         setNewStudent ({...newStudent,[e.target.name]:e.target.value})
         console.log(newStudent)
     }
+    const handleAddStudent = () => {
+        axios.post ('http://127.0.0.1:8000/api/students/', newStudent)
+        .then(response => {
+            setStudents([...studnts, response.data])
+            setNewStudent({
+                "first_name": "",
+                "last_name": "",
+                "age": "",
+                "gender": "",
+                "address": "",
+                "contact_number": "",
+                "gread": ""
+                }
+            )
+        }).catch(error => console.error(error))
+    }
     // const handleInpitChange = (e) => {
     //     const { name, value } = e.target;
     //     setNewStudent((newStudent) => ({
@@ -54,6 +70,7 @@ const App = () => {
         // <h1>App</h1>
         <div className="app-container">
             <h1>Student Managment System</h1>
+            {/* form Container */}
             <div className="form-container">
                 <div className="form-inputs">
                     <input type="text" name="first_name" placeholder="first name" value={newStudent.first_name} onChange={handleInpitChange}></input>
@@ -69,9 +86,39 @@ const App = () => {
                     {newStudent.contact_number} onChange={handleInpitChange}></input>
                     <input type="text" name="gread" placeholder="gread" value=
                     {newStudent.gread} onChange={handleInpitChange}></input>
+
+                    <div className="form-buttons">
+                        {
+                            SelectedStudents ? (
+                                <>
+                                    <button>Update</button>
+                                    <button>Cancel</button>
+                                </>
+                            ) : (
+                                <button onClick={handleAddStudent}>Add New Student</button>
+                            )
+                        }
+                    </div>
                     
                 </div>
             </div>
+            {/* Stdent List */}
+            <ul className="student-list">
+                {
+                    studnts.map(studnts =>(
+                        <li key={studnts.id}>
+                            <div>
+                                <strong>{studnts.first_name} {studnts.last_name}</strong>
+                            </div>
+                            <div className="actions">
+                                <button className="view">View</button>
+                                <button className="edit">Edit</button>
+                                <button className="delete">Delete</button>
+                            </div>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     )
 }
