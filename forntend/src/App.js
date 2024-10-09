@@ -4,7 +4,7 @@ import './main.css'
 
 const App = () => {
     const [studnts , setStudents] = useState([])
-    const [newStudents , setNewStudents] = useState({
+    const [newStudent , setNewStudent] = useState({
             "first_name": "",
             "last_name": "",
             "age": "",
@@ -39,9 +39,40 @@ const App = () => {
         
     }
 
-
+    const handleInpitChange = (e) => {
+        setNewStudent ({...newStudent,[e.target.name]:e.target.value})
+        console.log(newStudent)
+    }
+    // const handleInpitChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setNewStudent((newStudent) => ({
+    //       ...newStudent,
+    //       [e.target.name]: e.target.value,
+    //     }));
+    //   };
     return(
-        <h1>App</h1>
+        // <h1>App</h1>
+        <div className="app-container">
+            <h1>Student Managment System</h1>
+            <div className="form-container">
+                <div className="form-inputs">
+                    <input type="text" name="first_name" placeholder="first name" value={newStudent.first_name} onChange={handleInpitChange}></input>
+                    <input type="text" name="last_name" placeholder="last name" value=
+                    {newStudent.last_name} onChange={handleInpitChange}></input>
+                    <input type="text" name="age" placeholder="age" value=
+                    {newStudent.age} onChange={handleInpitChange}></input>
+                    <input type="text" name="gender" placeholder="gender" value=
+                    {newStudent.gender} onChange={handleInpitChange}></input>
+                    <textarea   name="address" placeholder="address" value=
+                    {newStudent.address} onChange={handleInpitChange}/> 
+                    <input type="text" name="contact_number" placeholder="contact number" value=
+                    {newStudent.contact_number} onChange={handleInpitChange}></input>
+                    <input type="text" name="gread" placeholder="gread" value=
+                    {newStudent.gread} onChange={handleInpitChange}></input>
+                    
+                </div>
+            </div>
+        </div>
     )
 }
 
