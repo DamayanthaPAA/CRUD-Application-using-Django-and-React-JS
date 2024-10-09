@@ -59,6 +59,11 @@ const App = () => {
             )
         }).catch(error => console.error(error))
     }
+    const handleViewClick = async(id) => {
+        const response = await axios.get('http://127.0.0.1:8000/api/students/${id}/')
+        setToView(response.data)
+        setOpenView(true)
+    }
     // const handleInpitChange = (e) => {
     //     const { name, value } = e.target;
     //     setNewStudent((newStudent) => ({
